@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Buzzlet</title>
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></link>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <link href="styles/styles.css" rel="stylesheet"></link>
+    </h:head>
+    <h:body>
+        
+        <div class="row">
+        
+        <div class="col-md-3">
+        <h2>Create Account</h2>
+        <h:form>
+        <h:panelGrid columns="3">
+            <h:outputLabel id="lblUsername" value="Username:"/>
+            <h:inputText id="txtUsername" required="true" value="#{userBB.user_name}" 
+                         requiredMessage="Username is required">
+            </h:inputText>
+            <h:message class="error" id="spnUsername" showDetail="true" showSummary="false" for="txtUsername"/>
+
+            <h:outputLabel id="lblPassword" value="Password:"/>
+            <h:inputText id="txtPassword" required="true" value="#{userBB.password}" 
+                         requiredMessage="Password is required">
+            </h:inputText>
+            <h:message class="error" id="spnPassword" showDetail="true" showSummary="false" for="txtPassword"/>
+
+            <br></br>
+            <h:commandButton id="btnSubmit" value="Submit" actionListener="#{userBB.submitForm}" /> 
+        </h:panelGrid>
+    </h:form>
+
+    <c:if test="#{not empty userBB.message}">
+    <h:outputLabel value="#{userBB.message}" id="lblMessage" class="error"/>
+</c:if>
+    </div>
+    
+    <div class="col-md-3">
+        
+        <h2>Login</h2>
+        <h:form>
+        <h:panelGrid columns="3">
+            <h:outputLabel id="lblUsernameLogin" value="Username:"/>
+            <h:inputText id="txtUsernameLogin" required="true" value="#{userBB.user_name}" 
+                         requiredMessage="Username is required">
+            </h:inputText>
+            <h:message class="error" id="spnUsernameLogin" showDetail="true" showSummary="false" for="txtUsernameLogin"/>
+
+            <h:outputLabel id="lblPasswordLogin" value="Password:"/>
+            <h:inputText id="txtPasswordLogin" required="true" value="#{userBB.password}" 
+                         requiredMessage="Password is required">
+            </h:inputText>
+            <h:message class="error" id="spnPassword" showDetail="true" showSummary="false" for="txtPasswordLogin"/>
+
+            <br></br>
+            <h:commandButton id="btnSubmit" value="Submit" actionListener="#{userBB.submitFormLogin}" /> 
+        </h:panelGrid>
+    </h:form>
+
+    <c:if test="#{not empty userBB.messageLogin}">
+    <h:outputLabel value="#{userBB.messageLogin}" id="lblMessageLogin" class="error"/>
+</c:if>
+        
+    </div>
+        
+        <div class="col-md-3">
+        
+        
+        <h2>List of Quizzes</h2>
+        <ui:repeat value="#{quizBB.allQuizzes}" var="quiz">
+            #{quiz.title}
+            <a href="takeQuiz.jsp?quizId=#{quiz.quiz_id}">Take Quiz</a><br/>
+        </ui:repeat>
+        </div>
+            
+        </div>
+            
+    </h:body>
+</html>
